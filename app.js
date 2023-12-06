@@ -18,6 +18,9 @@ function eventListener() {
     grid.addEventListener('mouseup', () => {
         isMouseDown = false;
     })
+    grid.addEventListener('mouseleave', () => {
+        isMouseDown = false;
+    })
     grid.addEventListener('mousemove', changeColor);
 
     clearBtn.addEventListener('click', clearSquares)
