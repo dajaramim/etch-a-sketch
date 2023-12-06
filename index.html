@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch a Sketch</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="grid" id="grid">
+    <h1 class="heading">Etch a Sketch!</h1>
+    <main class="main">
+
+        
+        <div class="interface">
+            <label for="color-picker">Choose a color</label>
+            <input type="color" id="color-picker" value="#000000">
+            <button>Random colors</button>
+            <button>New Grid</button>
+
+            <button id="clear-btn">Clear Color</button>
+        </div>
+
+        <div class="grid" id="grid">
 
 
-    </div>
+        </div>
+    </main>
     <script src="app.js"></script>
 </body>
+
 </html>
