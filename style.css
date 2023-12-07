@@ -8,29 +8,62 @@ html {
 *:after {
     box-sizing: inherit;
 }
+
+* {
+    font-family: 'Comic Neue', cursive;
+}
+
 body {
     user-select: none;
     background-color: #ccc;
 }
+
 .main {
     width: 120rem;
     display: flex;
     justify-content: center;
     gap: 5rem;
 }
+
 .heading {
     text-align: center;
-    font-size: 5rem;
+    font-size: 6rem;
+    font-weight: 700;
 }
+
 .interface {
     display: flex;
     flex-direction: column;
+    align-items: left;
     gap: 1rem;
 }
+
+.color-picker-label {
+    font-size: 3rem;
+}
+
+.color-picker {
+    align-self: center;
+    height: 10rem;
+    width: 10rem;
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    box-shadow: 3px 2px 3px #aeaeae;
+    cursor: pointer;
+}
+.color-picker:hover {
+    opacity: 0.8;
+}
+
 .grid {
     display: flex;
     justify-content: center;
+    box-shadow: 6px 4px 5px #aeaeae
 }
+
 .square {
     display: flex;
     margin: 0.1rem;
@@ -40,6 +73,7 @@ body {
     transition-property: opacity;
     cursor: pointer;
 }
+
 .square:hover {
     opacity: 0.7;
 }
