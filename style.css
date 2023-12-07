@@ -58,6 +58,22 @@ body {
     opacity: 0.8;
 }
 
+.interface-button{
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #4298b3;
+    text-align: center;
+    padding: 1rem;
+    margin: 0;
+    border: none;
+    box-shadow: 3px 2px 3px #aeaeae; 
+    transition-property: opacity;
+    transition-duration: 200ms;
+    cursor: pointer;
+}
+.interface-button:hover {
+    opacity: 0.8;
+}
 .grid {
     display: flex;
     justify-content: center;
