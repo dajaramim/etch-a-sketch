@@ -19,6 +19,7 @@ body {
 }
 
 .main {
+    margin: 0 auto;
     width: 120rem;
     display: flex;
     justify-content: center;
@@ -87,7 +88,6 @@ body {
     width: 4rem;
     background-color: rgb(255, 255, 255);
     transition-property: opacity;
-    cursor: pointer;
 }
 
 .square:hover {
