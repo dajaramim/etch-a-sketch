@@ -83,7 +83,6 @@ body {
 
 .square {
     display: flex;
-    margin: 0.1rem;
     height: 4rem;
     width: 4rem;
     background-color: rgb(255, 255, 255);
@@ -92,4 +91,24 @@ body {
 
 .square:hover {
     opacity: 0.7;
+}
+
+/* RANDOM */
+.random-body {
+    background-color: #9fdef2;
+}
+.random-heading {
+    background: linear-gradient(135deg, 
+    red 20% , orange 45%, yellow 50%, green 55% , blue 65%, indigo 80% );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.random-label {
+    color: #ffffff;
+    font-weight: 700;
+}
+.random-btn {
+    color: rgb(247, 14, 255);
+    background: linear-gradient(135deg, 
+    red 0%, orange 16.66%, yellow 33.33%, green 50%, blue 66.66%, indigo 83.33%, violet 100%);
 }
