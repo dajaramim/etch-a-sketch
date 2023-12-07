@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch a Sketch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap" rel="stylesheet">    
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -14,12 +17,12 @@
 
         
         <div class="interface">
-            <label for="color-picker">Choose a color</label>
-            <input type="color" id="color-picker" value="#000000">
-            <button>Random colors</button>
-            <button>New Grid</button>
+            <label class="color-picker-label" for="color-picker">Choose a color</label>
+            <input class="color-picker" type="color" id="color-picker" value="#000000">
+            <button class="interface-button" >Random colors</button>
+            <button class="interface-button">New Grid</button>
 
-            <button id="clear-btn">Clear Color</button>
+            <button class="interface-button" id="clear-btn">Clear Color</button>
         </div>
 
         <div class="grid" id="grid">
