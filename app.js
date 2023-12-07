@@ -1,4 +1,5 @@
 const grid = document.querySelector('#grid');
+const body = document.querySelector('body')
 const colorPicker = document.querySelector('#color-picker')
 const clearBtn = document.querySelector('#clear-btn')
 colorPicker.value = '#000000'
@@ -13,17 +14,14 @@ function eventListener() {
     colorPicker.addEventListener('change', () => {
         colorSelected = colorPicker.value
     })
-    grid.addEventListener('mousedown', () => {
+    body.addEventListener('mousedown', () => {
         isMouseDown = true;
     })
-    grid.addEventListener('mouseup', () => {
+    body.addEventListener('mouseup', () => {
         isMouseDown = false;
     })
-    grid.addEventListener('mouseleave', () => {
-        isMouseDown = false;
-    })
-    grid.addEventListener('mousemove', changeColor);
-    grid.addEventListener('click', changeColor);
+    body.addEventListener('mousemove', changeColor);
+    body.addEventListener('click', changeColor);
 
 
     clearBtn.addEventListener('click', clearSquares)
