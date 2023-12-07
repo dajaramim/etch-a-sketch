@@ -5,6 +5,7 @@ colorPicker.value = '#000000'
 let gridChildren;
 let colorSelected = colorPicker.value;
 let isMouseDown = false
+
 showGrid()
 
 eventListener()
@@ -22,6 +23,8 @@ function eventListener() {
         isMouseDown = false;
     })
     grid.addEventListener('mousemove', changeColor);
+    grid.addEventListener('click', changeColor);
+
 
     clearBtn.addEventListener('click', clearSquares)
 
@@ -29,7 +32,7 @@ function eventListener() {
 }
 
 function showGrid() {
-    
+
     for (let i = 0; i < 16; i++) {
         const row = document.createElement('div');
         for (let j = 0; j < 16; j++) {
@@ -43,7 +46,8 @@ function showGrid() {
 }
 
 function changeColor(e) {
-    if (e.target.classList.contains('square') && isMouseDown) {
+    if(!e.target.classList.contains('square')) return
+    if (isMouseDown || (!isMouseDown && e.type === 'click')) {
         e.target.style.backgroundColor = colorSelected;
     }
 }
@@ -56,9 +60,6 @@ function clearSquares() {
                 square.style.backgroundColor = '#ffffff'
             }
         });
-
-/*         
-        } */
     });
 
 }
