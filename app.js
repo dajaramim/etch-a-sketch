@@ -1,13 +1,16 @@
 const grid = document.querySelector('#grid');
-const body = document.querySelector('body')
-const colorPicker = document.querySelector('#color-picker')
-const eraseBtn = document.querySelector('#erase-btn')
-const clearBtn = document.querySelector('#clear-btn')
-const randomBtn = document.querySelector('#random-btn')
+const body = document.querySelector('body');
+const heading = document.querySelector('#heading');
+const labelChooseColor = document.querySelector('label[for="color-picker"]');
+const interfaceButtons = document.querySelectorAll('.interface-button');
+const colorPicker = document.querySelector('#color-picker');
+const eraseBtn = document.querySelector('#erase-btn');
+const clearBtn = document.querySelector('#clear-btn');
+const randomBtn = document.querySelector('#random-btn');
 const defaultColor = '#000000'
 let isRandomMode = false;
 
-colorPicker.value = defaultColor
+colorPicker.value = defaultColor;
 let gridChildren;
 let colorSelected = colorPicker.value;
 let isMouseDown = false
@@ -57,9 +60,11 @@ function changeColor(e) {
     if (!e.target.classList.contains('square')) return
     if (isRandomMode) {
         colorSelected = getRandomColor()
+        
     }
     if (isMouseDown && !isSquarePainted) {
         e.target.style.backgroundColor = colorSelected;
+        colorPicker.value = colorSelected
         isSquarePainted = true
     }
 }
@@ -69,8 +74,10 @@ function changeColorSelected() {
 }
 
 function eraseSquare() {
+    isRandomMode = false
     colorPicker.value = '#ffffff';
     changeColorSelected();
+    normalMode()
 }
 
 function clearSquares() {
@@ -86,7 +93,31 @@ function clearSquares() {
 }
 function randomMode() {
     isRandomMode = !isRandomMode;
-    if (!isRandomMode) changeColorSelected();
+    if (isRandomMode) {
+        body.classList.add('random-body');
+        heading.classList.add('random-heading');
+        labelChooseColor.classList.add('random-label');
+        const buttons = Array.from(interfaceButtons);
+        buttons.forEach(btn => {
+            btn.classList.add('random-btn')
+        });
+        buttons[0].textContent = 'Normal Mode'
+    }
+    else {
+        normalMode()
+        changeColorSelected();
+    }
+}
+
+function normalMode() {
+    body.classList.remove('random-body');
+    heading.classList.remove('random-heading');
+    labelChooseColor.classList.remove('random-label');
+    const buttons = Array.from(interfaceButtons);
+    buttons.forEach(btn => {
+        btn.classList.remove('random-btn')
+    });
+    buttons[0].textContent = 'Random Mode'
 }
 
 function getRandomColor() {
@@ -94,6 +125,17 @@ function getRandomColor() {
     let green = Math.floor(Math.random() * 256);
     let red = Math.floor(Math.random() * 256);
 
-    const randomColor = `rgb(${red}, ${green}, ${blue})`
+    const randomColor = rgbToHex(red, green, blue);
     return randomColor;
+}
+function componentToHex(color) {
+    const hex = color.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(red, green, blue) {
+    const hexRed = componentToHex(red);
+    const hexGreen = componentToHex(green);
+    const hexBlue = componentToHex(blue);
+    return "#" + hexRed + hexGreen + hexBlue;
 }
