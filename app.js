@@ -1,3 +1,4 @@
+// Variables
 const grid = document.querySelector('#grid');
 const body = document.querySelector('body');
 const heading = document.querySelector('#heading');
@@ -7,17 +8,26 @@ const colorPicker = document.querySelector('#color-picker');
 const eraseBtn = document.querySelector('#erase-btn');
 const clearBtn = document.querySelector('#clear-btn');
 const randomBtn = document.querySelector('#random-btn');
+const rowsNumber = document.querySelector('#rows-number');
+const columnsNumber = document.querySelector('#columns-number');
+const newGrid = document.querySelector('#new-grid');
+
 const defaultColor = '#000000'
+const widthGrid = 600
+const heightGrid = 600
 let isRandomMode = false;
 
 colorPicker.value = defaultColor;
+rowsNumber.value = 16
+columnsNumber.value = 16
 let gridChildren;
 let colorSelected = colorPicker.value;
 let isMouseDown = false
 let isSquarePainted = false
 
-showGrid()
+showGrid(16,16)
 
+//Events
 eventListener()
 function eventListener() {
     colorPicker.addEventListener('change', changeColorSelected)
@@ -41,19 +51,34 @@ function eventListener() {
     eraseBtn.addEventListener('click', eraseSquare);
 
     clearBtn.addEventListener('click', clearSquares);
+    newGrid.addEventListener('click', () => {
+        clearGrid()
+        showGrid(rowsNumber.value, columnsNumber.value);
+    });
 }
 
-function showGrid() {
-    for (let i = 0; i < 16; i++) {
-        const row = document.createElement('div');
-        for (let j = 0; j < 16; j++) {
+// Functions
+function showGrid(rows, columns) {
+    for (let i = 0; i < rows; i++) {
+        const newRow = document.createElement('div');
+        for (let j = 0; j < columns; j++) {
             const square = document.createElement('div');
-            square.classList.add('square')
-            row.appendChild(square)
+            widthSquare = widthGrid / rows;
+            heightSquare = heightGrid / columns;
+            square.classList.add('square');
+            square.style.height = `${heightSquare}px`;
+            square.style.width = `${widthSquare}px`;
+
+            newRow.appendChild(square)
         }
-        grid.appendChild(row)
+        grid.appendChild(newRow)
     }
     gridChildren = Array.from(grid.childNodes);
+}
+function clearGrid() {
+    while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
 }
 
 function changeColor(e) {
@@ -99,9 +124,10 @@ function randomMode() {
         labelChooseColor.classList.add('random-label');
         const buttons = Array.from(interfaceButtons);
         buttons.forEach(btn => {
-            btn.classList.add('random-btn')
+            btn.classList.add('random-btn');
         });
-        buttons[0].textContent = 'Normal Mode'
+        buttons[0].textContent = 'Normal Mode';
+        labelChooseColor.textContent = 'Current Color';
     }
     else {
         normalMode()
@@ -115,9 +141,10 @@ function normalMode() {
     labelChooseColor.classList.remove('random-label');
     const buttons = Array.from(interfaceButtons);
     buttons.forEach(btn => {
-        btn.classList.remove('random-btn')
+        btn.classList.remove('random-btn');
     });
-    buttons[0].textContent = 'Random Mode'
+    buttons[0].textContent = 'Random Mode';
+    labelChooseColor.textContent = 'Choose a Color';
 }
 
 function getRandomColor() {

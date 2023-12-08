@@ -78,13 +78,14 @@ body {
 .grid {
     display: flex;
     justify-content: center;
-    box-shadow: 6px 4px 5px #aeaeae
+    width: 60rem;
+    height: 60rem;
+    box-shadow: 6px 4px 5px #aeaeae;
 }
 
 .square {
     display: flex;
-    height: 4rem;
-    width: 4rem;
+    border: 1px solid #ccc;
     background-color: rgb(255, 255, 255);
     transition-property: opacity;
 }
@@ -111,4 +112,26 @@ body {
     color: rgb(247, 14, 255);
     background: linear-gradient(135deg, 
     red 0%, orange 16.66%, yellow 33.33%, green 50%, blue 66.66%, indigo 83.33%, violet 100%);
+}
+.size-interface {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.size-label {
+    font-size: 2rem;
+
+}
+.size-input {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    outline: none;
+}
+.size-input:focus {
+   border: 1px solid #4298b3;
 }
