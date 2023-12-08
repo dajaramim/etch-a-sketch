@@ -63,6 +63,7 @@ function eventListener() {
 
 // Functions
 function showGrid(rows, columns) {
+    if(rows > 100 || columns > 100) return
     for (let i = 0; i < rows; i++) {
         const newRow = document.createElement('div');
         for (let j = 0; j < columns; j++) {
@@ -81,10 +82,7 @@ function showGrid(rows, columns) {
 }
 
 function changeColor(e) {
-
-
     if (!e.target.classList.contains('square')) return
-
     if (isRandomMode) {
         colorSelected = getRandomColor()
     }
@@ -93,12 +91,10 @@ function changeColor(e) {
         colorPicker.value = colorSelected
         isSquarePainted = true
     }
-
 }
 
 function makeSquareDarker(e) {
     if (!e.target.classList.contains('square')) return
-
     squareStyle = getComputedStyle(e.target);
     brightnessProperty = squareStyle.getPropertyValue('filter');
     brightnessPercent = parseFloat(brightnessProperty.slice(11, 14));
