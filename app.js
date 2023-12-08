@@ -16,7 +16,7 @@ const defaultColor = '#000000'
 const widthGrid = 600
 const heightGrid = 600
 let isRandomMode = false;
-
+let previewColor;
 colorPicker.value = defaultColor;
 rowsNumber.value = 16
 columnsNumber.value = 16
@@ -25,7 +25,7 @@ let colorSelected = colorPicker.value;
 let isMouseDown = false
 let isSquarePainted = false
 
-showGrid(16,16)
+showGrid(16, 16)
 
 //Events
 eventListener()
@@ -38,13 +38,17 @@ function eventListener() {
         isMouseDown = false;
     })
     body.addEventListener('mousemove', changeColor);
-
+    body.addEventListener('mousedown', changeColor);
     body.addEventListener('mouseout', (e) => {
         if (e.target.classList.contains('square')) {
             isSquarePainted = false;
         }
     });
-    body.addEventListener('mousedown', changeColor);
+    body.addEventListener('mousemove', (e) => {
+        previewColor = e.target.style.backgroundColor
+    });
+    body.addEventListener('click', makeSquareDarker);
+
 
     randomBtn.addEventListener('click', randomMode);
 
@@ -75,22 +79,37 @@ function showGrid(rows, columns) {
     }
     gridChildren = Array.from(grid.childNodes);
 }
-function clearGrid() {
-    while (grid.firstChild) {
-        grid.removeChild(grid.firstChild);
-    }
-}
 
 function changeColor(e) {
+
+
     if (!e.target.classList.contains('square')) return
+
     if (isRandomMode) {
         colorSelected = getRandomColor()
-        
     }
     if (isMouseDown && !isSquarePainted) {
         e.target.style.backgroundColor = colorSelected;
         colorPicker.value = colorSelected
         isSquarePainted = true
+    }
+
+}
+
+function makeSquareDarker(e) {
+    if (!e.target.classList.contains('square')) return
+
+    squareStyle = getComputedStyle(e.target);
+    brightnessProperty = squareStyle.getPropertyValue('filter');
+    brightnessPercent = parseFloat(brightnessProperty.slice(11, 14));
+
+    if (colorSelected === '#ffffff' || brightnessProperty === 'none' || hexToRgb(colorSelected) !== previewColor) {
+        e.target.style.filter = `brightness(1)`
+    }
+    else if (!isRandomMode && brightnessPercent > 0.0) {
+        e.target.style.filter = `brightness(${brightnessPercent - 0.1})`;
+    } else {
+        e.target.style.filter = ``
     }
 }
 
@@ -111,11 +130,19 @@ function clearSquares() {
         columns.forEach(square => {
             if (square.classList.contains('square')) {
                 square.style.backgroundColor = '#ffffff';
+                square.style.filter = ``;
             }
         });
     });
 
 }
+
+function clearGrid() {
+    while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
+}
+
 function randomMode() {
     isRandomMode = !isRandomMode;
     if (isRandomMode) {
@@ -166,3 +193,16 @@ function rgbToHex(red, green, blue) {
     const hexBlue = componentToHex(blue);
     return "#" + hexRed + hexGreen + hexBlue;
 }
+
+function hexToRgb(hex) {
+    hex = hex.replace(/^#/, '');
+
+    var bigint = parseInt(hex, 16);
+    var r = (bigint >> 16) & 255;
+    var g = (bigint >> 8) & 255;
+    var b = bigint & 255;
+
+    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+}
+
+
